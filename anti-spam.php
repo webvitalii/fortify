@@ -3,24 +3,25 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 4.0
+Version: 4.1
 Author: webvitaly
 Author URI: http://web-profile.com.ua/wordpress/plugins/
 License: GPLv3
 */
 
 $antispam_send_spam_comment_to_admin = false; // if true, than rejected spam comments will be sent to admin email
-
+$antispam_log_spam_comment = true; // if true, than rejected spam comments will be logged to wp-content/plugins/anti-spam/log/anti-spam-2015.log
 $antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
 // trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
 // more about the difference between trackback and pingback - http://web-profile.com.ua/web/trackback-vs-pingback/
 
-define('ANTISPAM_PLUGIN_VERSION', '4.0');
+define('ANTISPAM_PLUGIN_VERSION', '4.1');
 
 $antispam_settings = array(
 	'send_spam_comment_to_admin' => $antispam_send_spam_comment_to_admin,
 	'allow_trackbacks' => $antispam_allow_trackbacks,
-	'admin_email' => get_option('admin_email')
+	'admin_email' => get_option('admin_email'),
+	'log_spam_comment' => $antispam_log_spam_comment
 );
 
 include('anti-spam-functions.php');
@@ -29,7 +30,7 @@ include('anti-spam-info.php');
 
 function antispam_enqueue_script() {
 	if (is_singular() && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.0.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.1.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
@@ -63,7 +64,7 @@ function antispam_check_comment($commentdata) {
 	$antispam_pre_error_message = '<p><strong><a href="javascript:window.history.back()">Go back</a></strong> and try again.</p>';
 	$antispam_error_message = '';
 
-	if ($antispam_settings['send_spam_comment_to_admin']) { // if sending email to admin is enabled
+	if (($antispam_settings['send_spam_comment_to_admin']) || ($antispam_settings['log_spam_comment'])) { // if sending email to admin is enabled or loging
 		$post = get_post($comment->comment_post_ID);
 		$antispam_message_spam_info  = 'Spam for post: "'.$post->post_title.'"' . $rn;
 		$antispam_message_spam_info .= get_permalink($comment->comment_post_ID) . $rn.$rn;
@@ -125,7 +126,19 @@ function antispam_check_comment($commentdata) {
 				$antispam_message .= $antispam_message_append;
 				@wp_mail($antispam_settings['admin_email'], $antispam_subject, $antispam_message); // send spam comment to admin email
 			}
-			antispam_log_stats();
+			if ($antispam_settings['log_spam_comment']) {
+				$antispam_message = $rn.$rn.'========== ========== =========='.$rn.$rn;
+				$antispam_message .= $antispam_error_message . $rn.$rn;
+				$antispam_message .= $antispam_message_spam_info; // spam comment, post, cookie and other data
+
+				$log_file_name = plugin_dir_path( __FILE__ ).'log/anti-spam-'.date('Y').'.log';
+				$log_file = fopen( $log_file_name, 'a' );
+				if ($log_file) {
+					fwrite( $log_file, $antispam_message );
+					fclose( $log_file );
+				}
+			}			
+			antispam_counter_stats();
 			wp_die( $antispam_pre_error_message . $antispam_error_message ); // die - do not send comment and show errors
 		}
 	}
@@ -141,7 +154,7 @@ function antispam_check_comment($commentdata) {
 				$antispam_message .= $antispam_message_append;
 				@wp_mail($antispam_settings['admin_email'], $antispam_subject, $antispam_message); // send trackback comment to admin email
 			}
-			antispam_log_stats();
+			antispam_counter_stats();
 			wp_die($antispam_pre_error_message . $antispam_error_message); // die - do not send trackback
 		}
 	}

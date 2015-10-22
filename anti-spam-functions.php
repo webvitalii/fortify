@@ -1,6 +1,6 @@
 <?php
 
-function antispam_log_stats() {
+function antispam_counter_stats() {
 	$antispam_stats = get_option('antispam_stats', array());
 	if (array_key_exists('blocked_total', $antispam_stats)){
 		$antispam_stats['blocked_total']++;
