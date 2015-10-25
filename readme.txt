@@ -140,6 +140,7 @@ The plugin is pretty small and easy to read.
 * added log spam to file feature (huge thanks to [Guti](http://www.javiergutierrezchamorro.com/ "Javier Gutiérrez Chamorro")
 * prevent full path disclosure
 * added empty index.php file
+* publish plugin to Github
 
 = 4.0 - 2015-10-11 =
 * dropped jQuery dependency (huge thanks to [Guti](http://www.javiergutierrezchamorro.com/ "Javier Gutiérrez Chamorro") for rewriting javascript code from scratch. Força Barça! )
