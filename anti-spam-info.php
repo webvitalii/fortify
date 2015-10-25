@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') OR exit; // prevent full path disclosure
+
 function antispam_admin_notice() {
 	global $pagenow;
 	if ($pagenow == 'edit-comments.php'):
