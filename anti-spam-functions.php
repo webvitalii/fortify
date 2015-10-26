@@ -26,6 +26,8 @@ function antispam_log( $spam_comment = '' ) {
 	$time_past = strtotime( '-1 year', time() );
 	$date_past = date( 'Y-m', $time_past );
 	$log_file_name_to_delete = plugin_dir_path( __FILE__ ).'log/anti-spam-'.$date_past.'.log';
-	unlink( $log_file_name_to_delete );
+	if (file_exists( $log_file_name_to_delete )) {
+		unlink( $log_file_name_to_delete );
+	}
 
 }
