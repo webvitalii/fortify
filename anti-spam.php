@@ -5,6 +5,7 @@ Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
 Version: 4.1
 Author: webvitaly
+Text Domain: anti-spam
 Author URI: http://web-profile.com.ua/wordpress/plugins/
 License: GPLv3
 */
@@ -12,7 +13,7 @@ License: GPLv3
 defined('ABSPATH') OR exit; // prevent full path disclosure
 
 $antispam_send_spam_comment_to_admin = false; // if true, than rejected spam comments will be sent to admin email
-$antispam_log_spam_comment = false; // if true, than rejected spam comments will be logged to wp-content/plugins/anti-spam/log/anti-spam-2015.log
+$antispam_log_spam_comment = false; // if true, than rejected spam comments will be logged to wp-content/plugins/anti-spam/log/anti-spam-2015-11.log
 $antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
 // trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
 // more about the difference between trackback and pingback - http://web-profile.com.ua/web/trackback-vs-pingback/
