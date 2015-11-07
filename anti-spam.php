@@ -107,16 +107,16 @@ function antispam_check_comment($commentdata) {
 			if ( trim($_POST['antspm-d']) != date('Y') ) { // extra js-only check: there is no js added input - it is spam
 				$spam_flag = true;
 				if (empty($_POST['antspm-q'])) { // empty answer - it is spam
-					$antispam_error_message .= 'Error: empty answer. ['.$_POST['antspm-q'].']<br> '.$rn;
+					$antispam_error_message .= 'Error: empty answer. ['.esc_attr( $_POST['antspm-q'] ).']<br> '.$rn;
 				} else {
-					$antispam_error_message .= 'Error: answer is wrong. ['.$_POST['antspm-q'].']<br> '.$rn;
+					$antispam_error_message .= 'Error: answer is wrong. ['.esc_attr( $_POST['antspm-q'] ).']<br> '.$rn;
 				}
 			}
 		}
 
 		if ( ! empty($_POST['antspm-e-email-url-website'])) { // trap field is not empty - it is spam
 			$spam_flag = true;
-			$antispam_error_message .= 'Error: field should be empty. ['.$_POST['antspm-e-email-url-website'].']<br> '.$rn;
+			$antispam_error_message .= 'Error: field should be empty. ['.esc_attr( $_POST['antspm-e-email-url-website'] ).']<br> '.$rn;
 		}
 
 		if ($spam_flag) { // it is spam
