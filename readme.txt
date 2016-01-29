@@ -3,8 +3,8 @@ Contributors: webvitaly
 Donate link: http://web-profile.com.ua/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
-Tested up to: 4.5
-Stable tag: 4.1
+Tested up to: 4.7
+Stable tag: 4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -15,7 +15,7 @@ No spam in comments. No captcha.
 > **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitaly "Upgrade to Pro")** |
 > **[Anti-spam](http://web-profile.com.ua/wordpress/plugins/anti-spam/ "Plugin page")** |
 > **[Donate](http://web-profile.com.ua/donate/ "Support the development")** |
-> **[Github](https://github.com/webvitaly/anti-spam "Fork")**
+> **[GitHub](https://github.com/webvitaly/anti-spam "Fork")**
 
 
 **Captcha madness:**
@@ -136,8 +136,11 @@ The plugin is pretty small and easy to read.
 
 == Changelog ==
 
+= 4.2 - 2016-01-30 =
+* removed XSS vulnerability - thanks to Kenan from [tbmnull.com](http://tbmnull.com/)
+
 = 4.1 - 2015-10-25 =
-* added log spam to file feature (huge thanks to [Guti](http://www.javiergutierrezchamorro.com/ "Javier Gutiérrez Chamorro")
+* added log spam to file feature - huge thanks to [Guti](http://www.javiergutierrezchamorro.com/ "Javier Gutiérrez Chamorro")
 * prevent full path disclosure
 * added empty index.php file
 * publish plugin to Github

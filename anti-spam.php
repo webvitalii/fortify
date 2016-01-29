@@ -3,14 +3,16 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 4.1
+Version: 4.2
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.com.ua/wordpress/plugins/
 License: GPLv3
 */
 
-defined('ABSPATH') OR exit; // prevent full path disclosure
+if ( ! defined( 'ABSPATH' ) ) { // prevent full path disclosure
+	exit;
+}
 
 $antispam_send_spam_comment_to_admin = false; // if true, than rejected spam comments will be sent to admin email
 $antispam_log_spam_comment = false; // if true, than rejected spam comments will be logged to wp-content/plugins/anti-spam/log/anti-spam-2015-11.log
@@ -18,7 +20,7 @@ $antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
 // trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
 // more about the difference between trackback and pingback - http://web-profile.com.ua/web/trackback-vs-pingback/
 
-define('ANTISPAM_PLUGIN_VERSION', '4.1');
+define('ANTISPAM_PLUGIN_VERSION', '4.2');
 
 $antispam_settings = array(
 	'send_spam_comment_to_admin' => $antispam_send_spam_comment_to_admin,
@@ -33,7 +35,7 @@ include('anti-spam-info.php');
 
 function antispam_enqueue_script() {
 	if (is_singular() && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.1.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.2.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
@@ -159,17 +161,21 @@ function antispam_check_comment($commentdata) {
 	return $commentdata; // if comment does not looks like spam
 }
 
+
 if ( ! is_admin()) {
 	add_filter('preprocess_comment', 'antispam_check_comment', 1);
 }
 
 
 function antispam_plugin_meta($links, $file) { // add some links to plugin meta row
-	if (strpos($file, 'anti-spam/anti-spam.php') !== false) {
-		$links = array_merge($links, array('<a href="http://web-profile.com.ua/wordpress/plugins/anti-spam/" title="Plugin page">Anti-spam</a>'));
-		$links = array_merge($links, array('<a href="http://web-profile.com.ua/donate/" title="Support the development">Donate</a>'));
-		$links = array_merge($links, array('<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitaly" title="Upgrade to Pro">Anti-spam Pro</a>'));
+	if ( $file == plugin_basename( __FILE__ ) ) {
+		$row_meta = array(
+			'support' => '<a href="http://web-profile.com.ua/wordpress/plugins/anti-spam/" target="_blank"><span class="dashicons dashicons-editor-help"></span> ' . __( 'Anti-spam', 'anti-spam' ) . '</a>',
+			'donate' => '<a href="http://web-profile.com.ua/donate/" target="_blank"><span class="dashicons dashicons-heart"></span> ' . __( 'Donate', 'anti-spam' ) . '</a>',
+			'upgrage' => '<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitaly" target="_blank"><span class="dashicons dashicons-star-filled"></span> ' . __( 'Anti-spam Pro', 'anti-spam' ) . '</a>'
+		);
+		$links = array_merge( $links, $row_meta );
 	}
-	return $links;
+	return (array) $links;
 }
 add_filter('plugin_row_meta', 'antispam_plugin_meta', 10, 2);
