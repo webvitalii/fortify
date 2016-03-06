@@ -172,7 +172,7 @@ function antispam_plugin_meta($links, $file) { // add some links to plugin meta 
 		$row_meta = array(
 			'support' => '<a href="http://web-profile.com.ua/wordpress/plugins/anti-spam/" target="_blank"><span class="dashicons dashicons-editor-help"></span> ' . __( 'Anti-spam', 'anti-spam' ) . '</a>',
 			'donate' => '<a href="http://web-profile.com.ua/donate/" target="_blank"><span class="dashicons dashicons-heart"></span> ' . __( 'Donate', 'anti-spam' ) . '</a>',
-			'upgrage' => '<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitaly" target="_blank"><span class="dashicons dashicons-star-filled"></span> ' . __( 'Anti-spam Pro', 'anti-spam' ) . '</a>'
+			'upgrage' => '<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii" target="_blank"><span class="dashicons dashicons-star-filled"></span> ' . __( 'Anti-spam Pro', 'anti-spam' ) . '</a>'
 		);
 		$links = array_merge( $links, $row_meta );
 	}
