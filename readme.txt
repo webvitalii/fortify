@@ -16,7 +16,7 @@ No spam in comments. No captcha.
 > **[Anti-spam](http://web-profile.com.ua/wordpress/plugins/anti-spam/ "Plugin page")** |
 > **[Donate](http://web-profile.com.ua/donate/ "Support the development")** |
 > **[GitHub](https://github.com/webvitalii/anti-spam "Fork")** |
-> **[Silver Bullet Pro](http://codecanyon.net/item/silver-bullet-pro/edit/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
+> **[Silver Bullet Pro](http://codecanyon.net/item/silver-bullet-pro/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
 
 **Captcha madness:**
 
@@ -41,7 +41,7 @@ If you get an error - you may check the solution in the [Support section](http:/
 
 = Useful: =
 * **[Anti-spam Pro - extended version with settings and manual spam protection](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")**
-* **[Silver Bullet Pro - Speedup and protect WordPress in a smart way](http://codecanyon.net/item/silver-bullet-pro/edit/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
+* **[Silver Bullet Pro - Speedup and protect WordPress in a smart way](http://codecanyon.net/item/silver-bullet-pro/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
 
 == Installation ==
 
