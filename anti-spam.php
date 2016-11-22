@@ -3,7 +3,7 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 4.2
+Version: 4.3
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.com.ua/wordpress/plugins/
@@ -20,7 +20,7 @@ $antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
 // trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
 // more about the difference between trackback and pingback - http://web-profile.com.ua/web/trackback-vs-pingback/
 
-define('ANTISPAM_PLUGIN_VERSION', '4.2');
+define('ANTISPAM_PLUGIN_VERSION', '4.3');
 
 $antispam_settings = array(
 	'send_spam_comment_to_admin' => $antispam_send_spam_comment_to_admin,

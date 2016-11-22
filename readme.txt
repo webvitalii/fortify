@@ -3,8 +3,8 @@ Contributors: webvitaly
 Donate link: http://web-profile.com.ua/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
-Tested up to: 4.7
-Stable tag: 4.2
+Tested up to: 4.9
+Stable tag: 4.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -134,6 +134,10 @@ The plugin is pretty small and easy to read.
 
 
 == Changelog ==
+
+
+= 4.3 - 2016-11-22 =
+* fix notices
 
 = 4.2 - 2016-01-30 =
 * removed XSS vulnerability - thanks to Kenan from [tbmnull.com](http://tbmnull.com/)
