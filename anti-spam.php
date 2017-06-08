@@ -34,7 +34,8 @@ include('anti-spam-info.php');
 
 
 function antispam_enqueue_script() {
-	if (is_singular() && comments_open()) { // load script only for pages with comments form
+        global $withcomments; // WP flag to show comments on all pages
+        if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
 		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.3.js', __FILE__), null, null, true);
 	}
 }
