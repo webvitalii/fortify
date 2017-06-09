@@ -3,7 +3,7 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 4.3
+Version: 4.4
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.com.ua/wordpress/plugins/
@@ -20,7 +20,7 @@ $antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
 // trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
 // more about the difference between trackback and pingback - http://web-profile.com.ua/web/trackback-vs-pingback/
 
-define('ANTISPAM_PLUGIN_VERSION', '4.3');
+define('ANTISPAM_PLUGIN_VERSION', '4.4');
 
 $antispam_settings = array(
 	'send_spam_comment_to_admin' => $antispam_send_spam_comment_to_admin,
@@ -34,9 +34,9 @@ include('anti-spam-info.php');
 
 
 function antispam_enqueue_script() {
-        global $withcomments; // WP flag to show comments on all pages
-        if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.3.js', __FILE__), null, null, true);
+	global $withcomments; // WP flag to show comments on all pages
+	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.4.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
