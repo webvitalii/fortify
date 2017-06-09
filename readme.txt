@@ -1,6 +1,6 @@
 === Anti-spam ===
 Contributors: webvitaly
-Donate link: http://web-profile.com.ua/donate/
+Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
 Tested up to: 5.0
@@ -13,8 +13,8 @@ No spam in comments. No captcha.
 == Description ==
 
 > **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")** |
-> **[Anti-spam](http://web-profile.com.ua/wordpress/plugins/anti-spam/ "Plugin page")** |
-> **[Donate](http://web-profile.com.ua/donate/ "Support the development")** |
+> **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")** |
+> **[Donate](http://web-profile.net/donate/ "Support the development")** |
 > **[GitHub](https://github.com/webvitalii/anti-spam "Fork")** |
 > **[Silver Bullet Pro](http://codecanyon.net/item/silver-bullet-pro/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
 
@@ -111,7 +111,7 @@ Users rarely use trackbacks because it is manual and requires extra input. Spamm
 Users use pingbacks very often because they work automatically. Spammers does not use pingbacks because backlinks are checked.
 So trackbacks are blocked by default but pingbacks are enabled. You may enable trackbacks if you use it.
 Edit [anti-spam.php](http://plugins.trac.wordpress.org/browser/anti-spam/trunk/anti-spam.php) file and find "$antispam_allow_trackbacks" and make it "true".
-You may read more about the [difference between trackbacks and pingbacks](http://web-profile.com.ua/web/trackback-vs-pingback/).
+You may read more about the [difference between trackbacks and pingbacks](http://web-profile.net/web/trackback-vs-pingback/).
 
 = What browsers are supported? =
 
