@@ -135,7 +135,7 @@ The plugin is pretty small and easy to read.
 
 == Changelog ==
 
-= 4.4 - 2017-06-08 =
+= 4.4 - 2017-08-30 =
 * Fixed issue with showing comments on every page. Thanks to [johnh10](https://wordpress.org/support/topic/shows-the-captcha-on-archive-pages/)
 
 = 4.3 - 2016-11-22 =
