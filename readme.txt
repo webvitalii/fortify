@@ -15,15 +15,8 @@ No spam in comments. No captcha.
 > **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")** |
 > **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")** |
 > **[Donate](http://web-profile.net/donate/ "Support the development")** |
-> **[GitHub](https://github.com/webvitalii/anti-spam "Fork")** |
-> **[Silver Bullet Pro](http://codecanyon.net/item/silver-bullet-pro/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
+> **[GitHub](https://github.com/webvitalii/anti-spam "Fork")**
 
-**Captcha madness:**
-
-[youtube https://www.youtube.com/watch?v=WqnXp6Saa8Y]
-
-
-**Why humans should prove that they are humans by filling captchas? Lets bots prove that they are not bots with adding javascript to their user-agents!**
 
 Anti-spam plugin blocks spam in comments automatically, invisibly for users and for admins.
 
@@ -36,8 +29,13 @@ Plugin is easy to use: just install it and it just works.
 
 **Plugin blocks spam only in comments section**.
 
+
+**Why humans should prove that they are humans by filling captchas? Lets bots prove that they are not bots with adding javascript to their user-agents!**
+
+
 After installing the Anti-spam plugin **try to submit a comment on your site being logged out**.
 If you get an error - you may check the solution in the [Support section](http://wordpress.org/support/plugin/anti-spam) or submit a new topic with detailed description of your problem.
+
 
 = Useful: =
 * **[Anti-spam Pro - extended version with settings and manual spam protection](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")**
@@ -45,8 +43,8 @@ If you get an error - you may check the solution in the [Support section](http:/
 
 == Installation ==
 
-1. install and activate the plugin on the Plugins page
-2. enjoy life without spam in comments
+1. Install and activate the plugin on the Plugins page
+2. Enjoy life without spam in comments
 
 == Frequently Asked Questions ==
 
