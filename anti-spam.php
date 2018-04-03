@@ -3,7 +3,7 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 4.4
+Version: 5.0
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.net/wordpress/plugins/
@@ -14,19 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) { // prevent full path disclosure
 	exit;
 }
 
-$antispam_send_spam_comment_to_admin = false; // if true, than rejected spam comments will be sent to admin email
-$antispam_log_spam_comment = false; // if true, than rejected spam comments will be logged to wp-content/plugins/anti-spam/log/anti-spam-2015-11.log
-$antispam_allow_trackbacks = false; // if true, than trackbacks will be allowed
-// trackbacks almost not used by users, but mostly used by spammers; pingbacks are always enabled
-// more about the difference between trackback and pingback - http://web-profile.net/web/trackback-vs-pingback/
-
-define('ANTISPAM_PLUGIN_VERSION', '4.4');
+define('ANTISPAM_PLUGIN_VERSION', '5.0');
 
 $antispam_settings = array(
-	'send_spam_comment_to_admin' => $antispam_send_spam_comment_to_admin,
-	'allow_trackbacks' => $antispam_allow_trackbacks,
-	'admin_email' => get_option('admin_email'),
-	'log_spam_comment' => $antispam_log_spam_comment
+	'send_spam_comment_to_admin' => false,
+	'save_spam_comments' => true
 );
 
 include('anti-spam-functions.php');
@@ -36,10 +28,22 @@ include('anti-spam-info.php');
 function antispam_enqueue_script() {
 	global $withcomments; // WP flag to show comments on all pages
 	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-4.4.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.0.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
+
+
+function antispam_process_comments( $comment_ID, $comment_approved ) {
+	global $antispam_settings;
+	if ( $antispam_settings['save_spam_comments'] ) {
+		if( antispam_check_for_spam() ) {
+			wp_set_comment_status( $comment_ID, 'spam' );
+			antispam_counter_stats();
+		}
+	}
+}
+add_action( 'comment_post', 'antispam_process_comments', 10, 2 );
 
 
 function antispam_form_part() {
@@ -67,40 +71,13 @@ function antispam_check_comment($commentdata) {
 
 	extract($commentdata);
 
-	$antispam_pre_error_message = '<p><strong><a href="javascript:window.history.back()">Go back</a></strong> and try again.</p>';
+	//$antispam_pre_error_message = '<p><strong><a href="javascript:window.history.back()">Go back</a></strong> and try again.</p>';
 	$antispam_error_message = '';
 
-	if (($antispam_settings['send_spam_comment_to_admin']) || ($antispam_settings['log_spam_comment'])) { // if sending email to admin is enabled or loging
+	if ( $antispam_settings['send_spam_comment_to_admin'] ) { // if sending email to admin is enabled
 		$post = get_post($comment->comment_post_ID);
 		$antispam_message_spam_info  = 'Spam for post: "'.$post->post_title.'"' . $rn;
 		$antispam_message_spam_info .= get_permalink($comment->comment_post_ID) . $rn.$rn;
-
-		$antispam_message_spam_info .= 'IP: ' . $_SERVER['REMOTE_ADDR'] . $rn;
-		$antispam_message_spam_info .= 'User agent: ' . $_SERVER['HTTP_USER_AGENT'] . $rn;
-		$antispam_message_spam_info .= 'Referer: ' . $_SERVER['HTTP_REFERER'] . $rn.$rn;
-
-		$antispam_message_spam_info .= 'Comment data:'.$rn; // lets see what comment data spammers try to submit
-		foreach ($commentdata as $key => $value) {
-			$antispam_message_spam_info .= '$commentdata['.$key. '] = '.$value.$rn;
-		}
-		$antispam_message_spam_info .= $rn.$rn;
-
-		$antispam_message_spam_info .= 'Post vars:'.$rn; // lets see what post vars spammers try to submit
-		foreach ($_POST as $key => $value) {
-			$antispam_message_spam_info .= '$_POST['.$key. '] = '.$value.$rn;
-		}
-		$antispam_message_spam_info .= $rn.$rn;
-
-		$antispam_message_spam_info .= 'Cookie vars:'.$rn; // lets see what cookie vars spammers try to submit
-		foreach ($_COOKIE as $key => $value) {
-			$antispam_message_spam_info .= '$_COOKIE['.$key. '] = '.$value.$rn;
-		}
-		$antispam_message_spam_info .= $rn.$rn;
-
-		$antispam_message_append = '-----------------------------'.$rn;
-		$antispam_message_append .= 'This is spam comment rejected by Anti-spam plugin - wordpress.org/plugins/anti-spam/' . $rn;
-		$antispam_message_append .= 'You may edit "anti-spam.php" file and disable this notification.' . $rn;
-		$antispam_message_append .= 'You should find "$antispam_send_spam_comment_to_admin" and make it equal to "false".' . $rn;
 	}
 
 	if ( ! is_user_logged_in() && $comment_type != 'pingback' && $comment_type != 'trackback') { // logged in user is not a spammer
@@ -142,42 +119,58 @@ function antispam_check_comment($commentdata) {
 				$antispam_message = '';
 				$antispam_message .= $antispam_error_message . $rn.$rn;
 				$antispam_message .= $antispam_message_spam_info; // spam comment, post, cookie and other data
-				$antispam_message .= $antispam_message_append;
-				@wp_mail($antispam_settings['admin_email'], $antispam_subject, $antispam_message); // send spam comment to admin email
-			}
-			if ($antispam_settings['log_spam_comment']) {
-				$antispam_message = $rn.$rn.'========== ========== =========='.$rn.$rn;
-				$antispam_message .= $antispam_error_message . $rn.$rn;
-				$antispam_message .= $antispam_message_spam_info; // spam comment, post, cookie and other data
-				antispam_log( $antispam_message );
+				@wp_mail(get_option('admin_email'), $antispam_subject, $antispam_message); // send spam comment to admin email
 			}
 			antispam_counter_stats();
-			wp_die( $antispam_pre_error_message . $antispam_error_message ); // die - do not send comment and show errors
+			//wp_die( $antispam_pre_error_message . $antispam_error_message ); // die - do not send comment and show errors
 		}
 	}
-
-	if ( ! $antispam_settings['allow_trackbacks']) { // if trackbacks are blocked (pingbacks are alowed)
-		if ($comment_type == 'trackback') { // if trackbacks ( || $comment_type == 'pingback')
-			$antispam_error_message .= 'Error: trackbacks are disabled.<br> ';
-			if ($antispam_settings['send_spam_comment_to_admin']) { // if sending email to admin is enabled
-				$antispam_subject = 'Spam trackback on site ['.get_bloginfo('name').']'; // email subject
-				$antispam_message = '';
-				$antispam_message .= $antispam_error_message . $rn.$rn;
-				$antispam_message .= $antispam_message_spam_info; // spam comment, post, cookie and other data
-				$antispam_message .= $antispam_message_append;
-				@wp_mail($antispam_settings['admin_email'], $antispam_subject, $antispam_message); // send trackback comment to admin email
-			}
-			antispam_counter_stats();
-			wp_die($antispam_pre_error_message . $antispam_error_message); // die - do not send trackback
-		}
-	}
+	
+	/*echo '<pre>';
+	var_dump($commentdata);
+	echo '</pre>';
+	wp_die( '<pre>'.$commentdata.'</pre>' );*/
 
 	return $commentdata; // if comment does not looks like spam
 }
+add_filter('preprocess_comment', 'antispam_check_comment', 1);
 
 
-if ( ! is_admin()) {
-	add_filter('preprocess_comment', 'antispam_check_comment', 1);
+function antispam_check_for_spam() {
+	$spam_flag = false;
+		
+	$antspm_q = '';
+	if (isset($_POST['antspm-q'])) {
+		$antspm_q = trim($_POST['antspm-q']);
+	}
+	
+	$antspm_d = '';
+	if (isset($_POST['antspm-d'])) {
+		$antspm_d = trim($_POST['antspm-d']);
+	}
+	
+	$antspm_e = '';
+	if (isset($_POST['antspm-e-email-url-website'])) {
+		$antspm_e = trim($_POST['antspm-e-email-url-website']);
+	}
+	
+	if ( $antspm_q != date('Y') ) { // year-answer is wrong - it is spam
+		if ( $antspm_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
+			$spam_flag = true;
+			if (empty($antspm_q)) { // empty answer - it is spam
+				//$antispam_error_message .= 'Error: empty answer. ['.esc_attr( $antspm_q ).']<br> '.$rn;
+			} else {
+				//$antispam_error_message .= 'Error: answer is wrong. ['.esc_attr( $antspm_q ).']<br> '.$rn;
+			}
+		}
+	}
+
+	if ( ! empty($antspm_e)) { // trap field is not empty - it is spam
+		$spam_flag = true;
+		//$antispam_error_message .= 'Error: field should be empty. ['.esc_attr( $antspm_e ).']<br> '.$rn;
+	}
+	
+	return $spam_flag;
 }
 
 

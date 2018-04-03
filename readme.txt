@@ -89,14 +89,8 @@ The visibility option for this info block is saved per user.
 
 = How to test what spam comments were blocked? =
 
-You may enable sending all rejected spam comments to admin email.
-Edit [anti-spam.php](http://plugins.trac.wordpress.org/browser/anti-spam/trunk/anti-spam.php) file and find "$antispam_send_spam_comment_to_admin" and make it "true".
-Or you may log all blocked spam comments to log files.
-Edit [anti-spam.php](http://plugins.trac.wordpress.org/browser/anti-spam/trunk/anti-spam.php) file and find "$antispam_log_spam_comment" and make it "true".
-Spam comments will be saved in the file: http://site.com/wp-content/plugins/anti-spam/log/anti-spam-2015-12.log (where "site.com" is the domain and "2015-12" is year and month).
-Spam log is stored in files per month and history will be saved for 1 year and older log files will be deleted automatically.
-These features are made for debug purposes and values for these flags will be overwritten after plugin's update.
-These features are disabled by default.
+Blocked spam comments will be stored in the Spam comments section in your admin dashboard.
+These features are enabled by default.
 
 = Does plugin block spam from Contact or other forms? =
 
@@ -107,9 +101,9 @@ If you installed and activated the plugin and you still receiving spam - probabl
 
 Users rarely use trackbacks because it is manual and requires extra input. Spammers uses trackbacks because it is easy to cheat here.
 Users use pingbacks very often because they work automatically. Spammers does not use pingbacks because backlinks are checked.
-So trackbacks are blocked by default but pingbacks are enabled. You may enable trackbacks if you use it.
-Edit [anti-spam.php](http://plugins.trac.wordpress.org/browser/anti-spam/trunk/anti-spam.php) file and find "$antispam_allow_trackbacks" and make it "true".
-You may read more about the [difference between trackbacks and pingbacks](http://web-profile.net/web/trackback-vs-pingback/).
+So trackbacks are blocked but pingbacks are enabled. 
+You may use Anti-Spam Pro if you need to enable trackbacks.
+You may read more about the [difference between trackbacks and pingbacks](http://web-profile.net/web/trackback-vs-pingback/)
 
 = What browsers are supported? =
 
