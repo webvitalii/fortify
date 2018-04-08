@@ -43,7 +43,7 @@ function antispam_process_comments( $comment_ID, $comment_approved ) {
 		}
 	}
 }
-add_action( 'comment_post', 'antispam_process_comments', 10, 2 );
+//add_action( 'comment_post', 'antispam_process_comments', 10, 2 );
 
 
 function antispam_form_part() {
@@ -67,7 +67,18 @@ add_action('comment_form', 'antispam_form_part'); // add anti-spam inputs to the
 
 function antispam_check_comment($commentdata) {
 	global $antispam_settings;
-	$rn = "\r\n"; // .chr(13).chr(10)
+	
+	if( $antispam_settings['save_spam_comments'] ) {
+		if( antispam_check_for_spam() ) {
+			antispam_store_comment($commentdata);
+			antispam_counter_stats();
+			wp_die('Comment is a spam.'); // die - do not send comment and show errors
+			//return false;
+		}
+	}
+	
+	
+	/*$rn = "\r\n"; // .chr(13).chr(10)
 
 	extract($commentdata);
 
@@ -124,54 +135,21 @@ function antispam_check_comment($commentdata) {
 			antispam_counter_stats();
 			//wp_die( $antispam_pre_error_message . $antispam_error_message ); // die - do not send comment and show errors
 		}
-	}
+	}*/
 	
 	/*echo '<pre>';
 	var_dump($commentdata);
 	echo '</pre>';
 	wp_die( '<pre>'.$commentdata.'</pre>' );*/
+	
+	
+	//wp_die( $antispam_pre_error_message . $antispam_error_message ); // die - do not send comment and show errors
+	
+	
 
 	return $commentdata; // if comment does not looks like spam
 }
 add_filter('preprocess_comment', 'antispam_check_comment', 1);
-
-
-function antispam_check_for_spam() {
-	$spam_flag = false;
-		
-	$antspm_q = '';
-	if (isset($_POST['antspm-q'])) {
-		$antspm_q = trim($_POST['antspm-q']);
-	}
-	
-	$antspm_d = '';
-	if (isset($_POST['antspm-d'])) {
-		$antspm_d = trim($_POST['antspm-d']);
-	}
-	
-	$antspm_e = '';
-	if (isset($_POST['antspm-e-email-url-website'])) {
-		$antspm_e = trim($_POST['antspm-e-email-url-website']);
-	}
-	
-	if ( $antspm_q != date('Y') ) { // year-answer is wrong - it is spam
-		if ( $antspm_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
-			$spam_flag = true;
-			if (empty($antspm_q)) { // empty answer - it is spam
-				//$antispam_error_message .= 'Error: empty answer. ['.esc_attr( $antspm_q ).']<br> '.$rn;
-			} else {
-				//$antispam_error_message .= 'Error: answer is wrong. ['.esc_attr( $antspm_q ).']<br> '.$rn;
-			}
-		}
-	}
-
-	if ( ! empty($antspm_e)) { // trap field is not empty - it is spam
-		$spam_flag = true;
-		//$antispam_error_message .= 'Error: field should be empty. ['.esc_attr( $antspm_e ).']<br> '.$rn;
-	}
-	
-	return $spam_flag;
-}
 
 
 function antispam_plugin_meta($links, $file) { // add some links to plugin meta row
