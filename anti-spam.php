@@ -149,7 +149,10 @@ function antispam_check_comment($commentdata) {
 
 	return $commentdata; // if comment does not looks like spam
 }
-add_filter('preprocess_comment', 'antispam_check_comment', 1);
+
+if ( ! is_admin()) { // without this check it is not possible to add comment in admin section
+	add_filter('preprocess_comment', 'antispam_check_comment', 1);
+}
 
 
 function antispam_plugin_meta($links, $file) { // add some links to plugin meta row
