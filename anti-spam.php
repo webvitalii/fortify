@@ -22,6 +22,7 @@ $antispam_settings = array(
 );
 
 include('anti-spam-functions.php');
+include('anti-spam-settings.php');
 include('anti-spam-info.php');
 
 

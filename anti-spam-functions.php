@@ -2,6 +2,22 @@
 
 defined('ABSPATH') OR exit; // prevent full path disclosure
 
+function antispam_default_settings() {
+	$settings = array(
+		'save_spam_comments' => 0
+	);
+	return $settings;
+}
+
+
+function antispam_get_settings() {
+	$antispam_settings = (array) get_option('antispam_settings');
+	$default_settings = antispam_default_settings();
+	$antispam_settings = array_merge($default_settings, $antispam_settings); // set empty options with default values
+	return $antispam_settings;
+}
+
+
 function antispam_counter_stats() {
 	$antispam_stats = get_option('antispam_stats', array());
 	if (array_key_exists('blocked_total', $antispam_stats)){
@@ -49,6 +65,7 @@ function antispam_check_for_spam() {
 	
 	return $spam_flag;
 }
+
 
 function antispam_store_comment($commentdata) {
 	global $wpdb;
