@@ -48,6 +48,13 @@ If you get an error - you may check the solution in the [Support section](http:/
 
 == Frequently Asked Questions ==
 
+= How to test what spam comments were blocked? =
+
+You can visit Anti-spam settings page and enable saving blocked comments as spam in the spam section.
+To enabled that you need to go to: WordPress admin dashboard => Settings section => Anti-spam
+Saving blocked comments into spam section is disabled by default.
+Saving spam comments can help you to keep all the comments saved and review them in future if needed. You can easily mark comment as "not spam" if some of the comments were blocked by mistake.
+
 = What is the percentage of spam blocked? =
 
 Anti-spam plugin blocks 100% of automatic spam messages (sent by spam-bots via post requests).
@@ -86,12 +93,6 @@ If the spammer will fill this trap-field with anything - the comment will be blo
 You can find the info block with total spam blocked counter in the admin comments section.
 You can hide or show this info block in the "Screen Options" section.
 The visibility option for this info block is saved per user.
-
-= How to test what spam comments were blocked? =
-
-You can visit Anti-spam settings page and enable saving blocked comments as spam in the spam section.
-To enabled that you need to go to: WordPress admin dashboard => Settings section => Anti-spam
-Saving blocked comments into spam section is disabled by default.
 
 = Does plugin block spam from Contact or other forms? =
 
