@@ -89,8 +89,9 @@ The visibility option for this info block is saved per user.
 
 = How to test what spam comments were blocked? =
 
-Blocked spam comments will be stored in the Spam comments section in your admin dashboard.
-These features are enabled by default.
+You can visit Anti-spam settings page and enable saving blocked comments as spam in the spam section.
+To enabled that you need to go to: WordPress admin dashboard => Settings section => Anti-spam
+Saving blocked comments into spam section is disabled by default.
 
 = Does plugin block spam from Contact or other forms? =
 
@@ -102,7 +103,7 @@ If you installed and activated the plugin and you still receiving spam - probabl
 Users rarely use trackbacks because it is manual and requires extra input. Spammers uses trackbacks because it is easy to cheat here.
 Users use pingbacks very often because they work automatically. Spammers does not use pingbacks because backlinks are checked.
 So trackbacks are blocked but pingbacks are enabled. 
-You may use Anti-Spam Pro if you need to enable trackbacks.
+You may use [Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro") plugin if you need to enable trackbacks.
 You may read more about the [difference between trackbacks and pingbacks](http://web-profile.net/web/trackback-vs-pingback/)
 
 = What browsers are supported? =
@@ -126,6 +127,13 @@ The plugin is pretty small and easy to read.
 
 
 == Changelog ==
+
+= 5.0 =
+* Rewriting/refactoring a lot of the code
+* Adding Settings page
+* Storing blocked comments into the Spam section
+* Working on GDPR compliance
+
 
 = 4.4 - 2017-08-30 =
 * Fixed issue with showing comments on every page. Thanks to [johnh10](https://wordpress.org/support/topic/shows-the-captcha-on-archive-pages/)
