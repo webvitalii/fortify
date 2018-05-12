@@ -50,14 +50,14 @@ add_action('comment_form', 'antispam_form_part'); // add anti-spam inputs to the
 
 function antispam_check_comment($commentdata) {
 	$antispam_settings = antispam_get_settings();
-	
-	if( $antispam_settings['save_spam_comments'] ) {
-		if( antispam_check_for_spam() ) {
+
+	if( antispam_check_for_spam() ) {
+		if( $antispam_settings['save_spam_comments'] ) {
 			antispam_store_comment($commentdata);
-			antispam_counter_stats();
-			wp_die('Comment is a spam.'); // die - do not send comment and show errors
-			//return false;
 		}
+		antispam_counter_stats();
+		wp_die('Comment is a spam.'); // die - do not send comment and show errors
+		//return false;
 	}
 
 	return $commentdata; // if comment does not looks like spam
