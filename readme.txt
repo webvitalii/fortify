@@ -18,19 +18,14 @@ No spam in comments. No captcha.
 > **[GitHub](https://github.com/webvitalii/anti-spam "Fork")**
 
 
-Anti-spam plugin blocks spam in comments automatically, invisibly for users and for admins.
-
-* **no captcha**, because spam is not users' problem
-* **no moderation queues**, because spam is not administrators' problem
-* **no settings page**, because it is great to forget about spam completely and keep admin section clean
-
+Anti-spam plugin blocks automatic spam in comments section. No captcha. 
 
 Plugin is easy to use: just install it and it just works.
 
+Blocked comments can be stored in the Spam area if needed.
+
 **Plugin blocks spam only in comments section**.
 
-
-**Why humans should prove that they are humans by filling captchas? Lets bots prove that they are not bots with adding javascript to their user-agents!**
 
 
 After installing the Anti-spam plugin **try to submit a comment on your site being logged out**.
