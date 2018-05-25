@@ -4,7 +4,7 @@ Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
 Tested up to: 5.0
-Stable tag: 4.4
+Stable tag: 5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -22,9 +22,9 @@ Anti-spam plugin blocks automatic spam in comments section. No captcha.
 
 Plugin is easy to use: just install it and it just works.
 
-Blocked comments can be stored in the Spam area if needed. This can be enabled/disabled via Settings page. This is usefull for testing and debug purpose. Blocked spam comments can be easily converted to regular comments if needed.
+Blocked comments can be stored in the Spam area if needed. This can be enabled/disabled via Settings page. This is useful for testing and debug purpose. Blocked spam comments can be easily converted to regular comments if needed.
 
-Plugin is GDPR compliant and does not store any other user data except of the behavior mentioned above.
+Anti-spam plugin is GDPR compliant and does not store any other user data except of the behavior mentioned above.
 
 **Plugin blocks spam only in comments section**.
 
