@@ -4,7 +4,7 @@ Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
 Tested up to: 5.0
-Stable tag: 5.0
+Stable tag: 5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -125,6 +125,9 @@ The plugin is pretty small and easy to read.
 
 
 == Changelog ==
+
+= 5.1 =
+* Disable check for comments from logged in users
 
 = 5.0 =
 * Rewriting/refactoring a lot of the code
