@@ -50,6 +50,8 @@ add_action('comment_form', 'antispam_form_part'); // add anti-spam inputs to the
 
 function antispam_check_comment($commentdata) {
 	$antispam_settings = antispam_get_settings();
+	
+	extract($commentdata);
 
 	if ( ! is_user_logged_in() && $comment_type != 'pingback' && $comment_type != 'trackback') { // logged in user is not a spammer
 		if( antispam_check_for_spam() ) {
