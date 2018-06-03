@@ -3,7 +3,7 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 5.1
+Version: 5.2
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.net/wordpress/plugins/
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) { // prevent full path disclosure
 	exit;
 }
 
-define('ANTISPAM_PLUGIN_VERSION', '5.1');
+define('ANTISPAM_PLUGIN_VERSION', '5.2');
 
 include('anti-spam-functions.php');
 include('anti-spam-settings.php');
@@ -24,7 +24,7 @@ include('anti-spam-info.php');
 function antispam_enqueue_script() {
 	global $withcomments; // WP flag to show comments on all pages
 	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.1.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.2.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
@@ -34,6 +34,7 @@ function antispam_form_part() {
 	$rn = "\r\n"; // .chr(13).chr(10)
 
 	if ( ! is_user_logged_in()) { // add anti-spam fields only for not logged in users
+		echo $rn.'<!-- Anti-spam plugin v.'.ANTISPAM_PLUGIN_VERSION.' wordpress.org/plugins/anti-spam/ -->'.$rn;
 		echo '		<p class="antispam-group antispam-group-q" style="clear: both;">
 			<label>Current ye@r <span class="required">*</span></label>
 			<input type="hidden" name="antspm-a" class="antispam-control antispam-control-a" value="'.date('Y').'" />
@@ -59,9 +60,16 @@ function antispam_check_comment($commentdata) {
 				antispam_store_comment($commentdata);
 			}
 			antispam_counter_stats();
-			wp_die('Comment is a spam.'); // die - do not send comment and show errors
-			//return false;
+			wp_die('Comment is a spam.'); // die - do not send comment and show error message
 		}
+	}
+	
+	if ($comment_type == 'trackback') {
+		if( $antispam_settings['save_spam_comments'] ) {
+			antispam_store_comment($commentdata);
+		}
+		antispam_counter_stats();
+		wp_die('Trackbacks are disabled.'); // die - do not send trackback and show error message
 	}
 
 	return $commentdata; // if comment does not looks like spam
