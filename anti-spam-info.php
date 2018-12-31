@@ -1,6 +1,8 @@
 <?php
 
-defined('ABSPATH') OR exit; // prevent full path disclosure
+if ( ! defined( 'ABSPATH' ) ) { // Avoid direct calls to this file and prevent full path disclosure
+	exit;
+}
 
 function antispam_admin_notice() {
 	global $pagenow;

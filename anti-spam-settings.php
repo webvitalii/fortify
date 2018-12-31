@@ -4,7 +4,7 @@ Anti-spam settings code
 used WordPress Settings API - http://codex.wordpress.org/Settings_API
 */
 
-if ( ! defined( 'ABSPATH' ) ) { // prevent full path disclosure
+if ( ! defined( 'ABSPATH' ) ) { // Avoid direct calls to this file and prevent full path disclosure
 	exit;
 }
 

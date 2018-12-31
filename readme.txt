@@ -3,8 +3,8 @@ Contributors: webvitaly
 Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
-Tested up to: 5.0
-Stable tag: 5.2
+Tested up to: 5.2
+Stable tag: 5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -12,10 +12,10 @@ No spam in comments. No captcha.
 
 == Description ==
 
-> **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")** |
-> **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")** |
-> **[Donate](http://web-profile.net/donate/ "Support the development")** |
-> **[GitHub](https://github.com/webvitalii/anti-spam "Fork")**
+* **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")** |
+* **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")** |
+* **[Donate](http://web-profile.net/donate/ "Support the development")** |
+* **[GitHub](https://github.com/webvitalii/anti-spam "Fork")**
 
 
 Anti-spam plugin blocks automatic spam in comments section. No captcha. 
@@ -33,10 +33,6 @@ Anti-spam plugin is GDPR compliant and does not store any other user data except
 After installing the Anti-spam plugin **try to submit a comment on your site being logged out**.
 If you get an error - you may check the solution in the [Support section](http://wordpress.org/support/plugin/anti-spam) or submit a new topic with detailed description of your problem.
 
-
-= Useful: =
-* **[Anti-spam Pro - extended version with settings and manual spam protection](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")**
-* **[Silver Bullet Pro - Speedup and protect WordPress in a smart way](http://codecanyon.net/item/silver-bullet-pro/15171769?ref=webvitalii "Speedup and protect WordPress in a smart way")**
 
 == Installation ==
 
@@ -94,7 +90,7 @@ The visibility option for this info block is saved per user.
 = Does plugin block spam from Contact or other forms? =
 
 Plugin blocks spam only in comments form section and does not block spam from any other forms on site.
-If you installed and activated the plugin and you still receiving spam - probably this could be because of some other forms on your site (for example comments forms).
+If you installed and activated the plugin and you still receiving spam - probably this could be because of some other forms on your site (for example feedback form).
 
 = What about trackback spam? =
 
@@ -125,6 +121,12 @@ The plugin is pretty small and easy to read.
 
 
 == Changelog ==
+
+= 5.3 =
+* Fixed the typo in the readme
+* Readme cleanup
+* Code cleanup
+* Added dismissible notice
 
 = 5.2 =
 * Disable trackbacks

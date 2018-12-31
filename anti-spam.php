@@ -3,28 +3,31 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 5.2
+Version: 5.3
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.net/wordpress/plugins/
 License: GPLv3
 */
 
-if ( ! defined( 'ABSPATH' ) ) { // prevent full path disclosure
+if ( ! defined( 'ABSPATH' ) ) { // Avoid direct calls to this file and prevent full path disclosure
 	exit;
 }
 
-define('ANTISPAM_PLUGIN_VERSION', '5.2');
+define('ANTISPAM_PLUGIN_VERSION', '5.3');
 
 include('anti-spam-functions.php');
 include('anti-spam-settings.php');
 include('anti-spam-info.php');
 
+include 'anti-spam-notice.php';
+
+new AntiSpamNotice();
 
 function antispam_enqueue_script() {
 	global $withcomments; // WP flag to show comments on all pages
 	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.2.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.3.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
@@ -78,19 +81,6 @@ function antispam_check_comment($commentdata) {
 if ( ! is_admin()) { // without this check it is not possible to add comment in admin section
 	add_filter('preprocess_comment', 'antispam_check_comment', 1);
 }
-
-
-// This way still sends the email notifications
-/*function antispam_process_comments( $comment_ID, $comment_approved ) {
-	global $antispam_settings;
-	if ( $antispam_settings['save_spam_comments'] ) {
-		if( antispam_check_for_spam() ) {
-			wp_set_comment_status( $comment_ID, 'spam' );
-			antispam_counter_stats();
-		}
-	}
-}*/
-//add_action( 'comment_post', 'antispam_process_comments', 10, 2 );
 
 
 function antispam_plugin_meta($links, $file) { // add some links to plugin meta row
