@@ -3,7 +3,7 @@ Contributors: webvitaly
 Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 3.3
-Tested up to: 5.2
+Tested up to: 5.0
 Stable tag: 5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
