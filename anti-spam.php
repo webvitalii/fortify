@@ -3,7 +3,7 @@
 Plugin Name: Anti-spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 5.3
+Version: 5.4
 Author: webvitaly
 Text Domain: anti-spam
 Author URI: http://web-profile.net/wordpress/plugins/
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) { // Avoid direct calls to this file and prevent f
 	exit;
 }
 
-define('ANTISPAM_PLUGIN_VERSION', '5.3');
+define('ANTISPAM_PLUGIN_VERSION', '5.4');
 
 include('anti-spam-functions.php');
 include('anti-spam-settings.php');
@@ -22,12 +22,16 @@ include('anti-spam-info.php');
 
 include 'anti-spam-notice.php';
 
-new AntiSpamNotice();
+global $pagenow;
+if ($pagenow == 'options-general.php' && $_GET['page'] == 'anti-spam'):
+	new AntiSpamNotice();
+endif;
+
 
 function antispam_enqueue_script() {
 	global $withcomments; // WP flag to show comments on all pages
 	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.3.js', __FILE__), null, null, true);
+		wp_enqueue_script('anti-spam-script', plugins_url('/js/anti-spam-5.4.js', __FILE__), null, null, true);
 	}
 }
 add_action('wp_enqueue_scripts', 'antispam_enqueue_script');
