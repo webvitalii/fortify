@@ -44,7 +44,7 @@ If you get an error - you may check the solution in the [Support section](http:/
 = How to test what spam comments were blocked? =
 
 You can visit Anti-spam settings page and enable saving blocked comments as spam in the spam section.
-To enabled that you need to go to: WordPress admin dashboard => Settings section => Anti-spam
+To enable that you need to go to: WordPress admin dashboard => Settings section => Anti-spam
 Saving blocked comments into spam section is disabled by default.
 Saving spam comments can help you to keep all the comments saved and review them in future if needed. You can easily mark comment as "not spam" if some of the comments were blocked by mistake.
 
@@ -65,7 +65,7 @@ You can use [Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=
 
 The blocking algorithm is based on 2 methods: 'invisible js-captcha' and 'invisible input trap' (aka honeypot technique).
 
-= How does 'invisible js-captcha' method (aka honeypot) work? =
+= How does 'invisible js-captcha' method work? =
 
 The 'invisible js-captcha' method is based on fact that bots does not have javascript on their user-agents.
 Extra hidden field is added to comments form.
