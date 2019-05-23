@@ -12,9 +12,9 @@ No spam in comments. No captcha.
 
 == Description ==
 
-* **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")** |
-* **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")** |
-* **[Donate](http://web-profile.net/donate/ "Support the development")** |
+* **[Anti-spam Pro](http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii "Upgrade to Pro")**
+* **[Anti-spam](http://web-profile.net/wordpress/plugins/anti-spam/ "Plugin page")**
+* **[Donate](http://web-profile.net/donate/ "Support the development")**
 * **[GitHub](https://github.com/webvitalii/anti-spam "Fork")**
 
 
