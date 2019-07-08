@@ -53,7 +53,6 @@ wordpress.org/plugins/anti-spam/
 			if ( (elements[i].id === 'comments') || (elements[i].id === 'respond') || (elements[i].id === 'commentform') ) {
 				var class_index = elements[i].className.indexOf('anti-spam-form-processed');
 				if ( class_index == -1 ) { // form is not yet js processed
-					//elements[i].innerHTML += dynamic_control; // not working
 					elements[i].appendChild(dynamic_control);
 					elements[i].className = elements[i].className + ' anti-spam-form-processed';
 				}

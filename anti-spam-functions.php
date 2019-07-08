@@ -52,17 +52,11 @@ function antispam_check_for_spam() {
 	if ( $antspm_q != date('Y') ) { // year-answer is wrong - it is spam
 		if ( $antspm_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
 			$spam_flag = true;
-			if (empty($antspm_q)) { // empty answer - it is spam
-				//$antispam_error_message .= 'Error: empty answer. ['.esc_attr( $antspm_q ).']<br> '.$rn;
-			} else {
-				//$antispam_error_message .= 'Error: answer is wrong. ['.esc_attr( $antspm_q ).']<br> '.$rn;
-			}
 		}
 	}
 
 	if ( ! empty($antspm_e)) { // trap field is not empty - it is spam
 		$spam_flag = true;
-		//$antispam_error_message .= 'Error: field should be empty. ['.esc_attr( $antspm_e ).']<br> '.$rn;
 	}
 	
 	return $spam_flag;
