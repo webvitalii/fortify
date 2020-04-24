@@ -85,7 +85,7 @@ function antispam_plugin_meta($links, $file) { // add some links to plugin meta 
 		$row_meta = array(
 			'support' => '<a href="http://web-profile.net/wordpress/plugins/anti-spam/" target="_blank">' . __( 'Anti-spam', 'anti-spam' ) . '</a>',
 			'donate' => '<a href="http://web-profile.net/donate/" target="_blank">' . __( 'Donate', 'anti-spam' ) . '</a>',
-			'upgrage' => '<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii" target="_blank">' . __( 'Anti-spam Pro', 'anti-spam' ) . '</a>'
+			'upgrade' => '<a href="http://codecanyon.net/item/antispam-pro/6491169?ref=webvitalii" target="_blank">' . __( 'Anti-spam Pro', 'anti-spam' ) . '</a>'
 		);
 		$links = array_merge( $links, $row_meta );
 	}
