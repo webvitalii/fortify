@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) { // Avoid direct calls to this file and prevent f
 	exit;
 }
 
-function antispam_default_settings() {
+function fortify_default_settings() {
 	$settings = array(
 		'save_spam_comments' => 0
 	);
@@ -12,50 +12,50 @@ function antispam_default_settings() {
 }
 
 
-function antispam_get_settings() {
-	$antispam_settings = (array) get_option('antispam_settings');
-	$default_settings = antispam_default_settings();
-	$antispam_settings = array_merge($default_settings, $antispam_settings); // set empty options with default values
-	return $antispam_settings;
+function fortify_get_settings() {
+	$fortify_settings = (array) get_option('fortify_settings');
+	$default_settings = fortify_default_settings();
+	$fortify_settings = array_merge($default_settings, $fortify_settings); // set empty options with default values
+	return $fortify_settings;
 }
 
 
-function antispam_counter_stats() {
-	$antispam_stats = get_option('antispam_stats', array());
-	if (array_key_exists('blocked_total', $antispam_stats)){
-		$antispam_stats['blocked_total']++;
+function fortify_counter_stats() {
+	$fortify_stats = get_option('fortify_stats', array());
+	if (array_key_exists('blocked_total', $fortify_stats)){
+		$fortify_stats['blocked_total']++;
 	} else {
-		$antispam_stats['blocked_total'] = 1;
+		$fortify_stats['blocked_total'] = 1;
 	}
-	update_option('antispam_stats', $antispam_stats);
+	update_option('fortify_stats', $fortify_stats);
 }
 
 
-function antispam_check_for_spam() {
+function fortify_check_for_spam() {
 	$spam_flag = false;
 		
-	$antspm_q = '';
-	if (isset($_POST['antspm-q'])) {
-		$antspm_q = trim($_POST['antspm-q']);
+	$fortify_q = '';
+	if (isset($_POST['fortify-q'])) {
+		$fortify_q = trim($_POST['fortify-q']);
 	}
 	
-	$antspm_d = '';
-	if (isset($_POST['antspm-d'])) {
-		$antspm_d = trim($_POST['antspm-d']);
+	$fortify_d = '';
+	if (isset($_POST['fortify-d'])) {
+		$fortify_d = trim($_POST['fortify-d']);
 	}
 	
-	$antspm_e = '';
-	if (isset($_POST['antspm-e-email-url-website'])) {
-		$antspm_e = trim($_POST['antspm-e-email-url-website']);
+	$fortify_e = '';
+	if (isset($_POST['fortify-e-email-url-website'])) {
+		$fortify_e = trim($_POST['fortify-e-email-url-website']);
 	}
 	
-	if ( $antspm_q != date('Y') ) { // year-answer is wrong - it is spam
-		if ( $antspm_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
+	if ( $fortify_q != date('Y') ) { // year-answer is wrong - it is spam
+		if ( $fortify_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
 			$spam_flag = true;
 		}
 	}
 
-	if ( ! empty($antspm_e)) { // trap field is not empty - it is spam
+	if ( ! empty($fortify_e)) { // trap field is not empty - it is spam
 		$spam_flag = true;
 	}
 	
@@ -63,8 +63,9 @@ function antispam_check_for_spam() {
 }
 
 
-function antispam_store_comment($commentdata) {
+function fortify_store_comment($commentdata) {
 	global $wpdb;
+	$wp_error = true;
 
 	if ( isset( $commentdata['user_ID'] ) ) {
 		$commentdata['user_id'] = $commentdata['user_ID'] = (int) $commentdata['user_ID'];
@@ -103,7 +104,7 @@ function antispam_store_comment($commentdata) {
 
 	$commentdata = wp_filter_comment($commentdata);
 
-	$commentdata['comment_approved'] = wp_allow_comment( $commentdata, $avoid_die );
+	$commentdata['comment_approved'] = wp_allow_comment( $commentdata, $wp_error );
 	if ( is_wp_error( $commentdata['comment_approved'] ) ) {
 		return $commentdata['comment_approved'];
 	}
@@ -120,7 +121,7 @@ function antispam_store_comment($commentdata) {
 
 		$commentdata = wp_filter_comment( $commentdata );
 
-		$commentdata['comment_approved'] = wp_allow_comment( $commentdata, $avoid_die );
+		$commentdata['comment_approved'] = wp_allow_comment( $commentdata, $wp_error );
 		if ( is_wp_error( $commentdata['comment_approved'] ) ) {
 			return $commentdata['comment_approved'];
 		}
