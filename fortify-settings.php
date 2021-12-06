@@ -74,7 +74,8 @@ function fortify_settings() {
 		<div class="fortify-panel-info">
 			<p style="margin: 0;">
 				<span class="dashicons dashicons-chart-bar"></span>
-				<strong><?php echo $blocked_total; ?></strong> spam comments were blocked by <a href="https://wordpress.org/plugins/fortify/" target="_blank">Fortify</a> plugin so far.
+				<strong><?php echo esc_html($blocked_total); ?></strong> spam comments were blocked
+				by <a href="https://wordpress.org/plugins/fortify/" target="_blank">Fortify</a> plugin so far.
 			</p>
 		</div>
 

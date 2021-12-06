@@ -34,11 +34,12 @@ function fortify_form_part() {
 	$rn = "\r\n"; // .chr(13).chr(10)
 
 	if ( ! is_user_logged_in()) { // add fortify fields only for not logged in users
-		echo $rn.'<!-- Fortify plugin v.'.FORTIFY_PLUGIN_VERSION.' wordpress.org/plugins/fortify/ -->'.$rn;
+		echo $rn.'<!-- Fortify plugin v.'.esc_html(FORTIFY_PLUGIN_VERSION).' wordpress.org/plugins/fortify/ -->'.$rn;
 		echo '		<p class="fortify-group fortify-group-q" style="clear: both;">
 			<label>Current ye@r <span class="required">*</span></label>
 			<input type="hidden" name="fortify-a" class="fortify-control fortify-control-a" value="'.date('Y').'" />
-			<input type="text" name="fortify-q" class="fortify-control fortify-control-q" value="'.FORTIFY_PLUGIN_VERSION.'" autocomplete="off" />
+			<input type="text" name="fortify-q" class="fortify-control fortify-control-q"
+			    value="'.esc_html(FORTIFY_PLUGIN_VERSION).'" autocomplete="off" />
 		</p>'.$rn; // question (hidden with js)
 		echo '		<p class="fortify-group fortify-group-e" style="display: none;">
 			<label>Leave this field empty</label>

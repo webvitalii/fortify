@@ -36,17 +36,17 @@ function fortify_check_for_spam() {
 		
 	$fortify_q = '';
 	if (isset($_POST['fortify-q'])) {
-		$fortify_q = trim($_POST['fortify-q']);
+		$fortify_q = sanitize_text_field($_POST['fortify-q']);
 	}
 	
 	$fortify_d = '';
 	if (isset($_POST['fortify-d'])) {
-		$fortify_d = trim($_POST['fortify-d']);
+		$fortify_d = sanitize_text_field($_POST['fortify-d']);
 	}
 	
 	$fortify_e = '';
 	if (isset($_POST['fortify-e-email-url-website'])) {
-		$fortify_e = trim($_POST['fortify-e-email-url-website']);
+		$fortify_e = sanitize_text_field($_POST['fortify-e-email-url-website']);
 	}
 	
 	if ( $fortify_q != date('Y') ) { // year-answer is wrong - it is spam

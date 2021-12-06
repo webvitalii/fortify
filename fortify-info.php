@@ -49,7 +49,8 @@ function fortify_display_screen_option() {
 		<form method="post" class="fortify_screen_options_group" style="padding: 20px 0 5px 0;">
 			<input type="hidden" name="fortify_option_submit" value="1" />
 			<label>
-				<input name="fortify_info_visibility" type="checkbox" value="1" <?php echo $checked; ?> />
+				<input name="fortify_info_visibility" type="checkbox"
+                    value="1" <?php echo esc_html($checked); ?> />
 				Fortify info
 			</label>
 			<input type="submit" class="button" value="<?php _e('Apply'); ?>" />
