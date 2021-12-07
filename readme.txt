@@ -3,7 +3,7 @@ Contributors: webvitaly
 Donate link: http://web-profile.net/donate/
 Tags: spam, spammer, comment, comments, comment-spam, antispam, anti-spam, block-spam, spam-free, spambot, spam-bot, bot
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 5.8.2
 Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -45,7 +45,7 @@ If you get an error - you may check the solution in the [Support section](http:/
 You can visit Fortify settings page and enable saving blocked comments as spam in the spam section.
 To enabled that you need to go to: WordPress admin dashboard => Settings section => Fortify
 Saving blocked comments into spam section is disabled by default.
-Saving spam comments can help you to keep all the comments saved and review them in future if needed. You can easily mark comment as "not spam" if some of the comments were blocked by mistake.
+Saving spam comments can help you to keep all the comments saved and review them in future if needed. You can easily mark comment as "not spam" if some of the comments have been blocked by mistake.
 
 = What is the percentage of spam blocked? =
 
@@ -61,23 +61,9 @@ Plugin does not block manual spam (submitted by spammers manually via browser).
 
 = How does Fortify plugin work? =
 
-The blocking algorithm is based on 2 methods: 'invisible js-captcha' and 'invisible input trap' (aka honeypot technique).
-
-= How does 'invisible js-captcha' method (aka honeypot) work? =
-
-The 'invisible js-captcha' method is based on fact that bots does not have javascript on their user-agents.
-Extra hidden field is added to comments form.
-It is the question about the current year.
-If the user visits site, than this field is answered automatically with javascript, is hidden by javascript and css and invisible for the user.
-If the spammer will fill year-field incorrectly - the comment will be blocked because it is spam.
-
-= How does 'invisible input trap' (aka honeypot technique) method work? =
-
-The 'invisible input trap' method is based on fact that almost all the bots will fill inputs with name 'email' or 'url'.
-Extra hidden field is added to comments form.
-This field is hidden for the user and user will not fill it.
-But this field is visible for the spammer.
-If the spammer will fill this trap-field with anything - the comment will be blocked because it is spam.
+The blocking algorithm is based on "honeypot technique" and the fact that spam bots does not have JavaScript enabled.
+Fortify plugin adds invisible to regular users input fields.
+And spam bots fill in those fields which helps to identify that as spam.
 
 = How to know the counter of blocked spam comments? =
 
@@ -100,16 +86,6 @@ You may read more about the [difference between trackbacks and pingbacks](http:/
 = What browsers are supported? =
 
 All modern browsers and IE8+ are supported.
-
-= Unobtrusive JavaScript =
-
-Fortify plugin works with disabled JavaScript. JavaScript is disabled on less than 1% of devices.
-Users with disabled JavaScript should manually fill catcha-like input before submitting the comment.
-
-= And one more extra note... =
-
-If site has caching plugin enabled and cache is not cleared or if theme does not use 'comment_form' action
-and there is no plugin inputs in comments form - plugin tries to add hidden fields automatically using JavaScript.
 
 = Not enough information about the plugin? =
 

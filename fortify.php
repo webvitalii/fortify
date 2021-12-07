@@ -21,30 +21,24 @@ include('fortify-settings.php');
 include('fortify-info.php');
 
 
-function fortify_enqueue_script() {
-	global $withcomments; // WP flag to show comments on all pages
-	if ((is_singular() || $withcomments) && comments_open()) { // load script only for pages with comments form
-		wp_enqueue_script('fortify-script', plugins_url('/js/fortify-1.0.js', __FILE__), null, null, true);
-	}
-}
-add_action('wp_enqueue_scripts', 'fortify_enqueue_script');
-
-
 function fortify_form_part() {
 	$rn = "\r\n"; // .chr(13).chr(10)
 
 	if ( ! is_user_logged_in()) { // add fortify fields only for not logged in users
 		echo $rn.'<!-- Fortify plugin v.'.esc_html(FORTIFY_PLUGIN_VERSION).' wordpress.org/plugins/fortify/ -->'.$rn;
-		echo '		<p class="fortify-group fortify-group-q" style="clear: both;">
-			<label>Current ye@r <span class="required">*</span></label>
-			<input type="hidden" name="fortify-a" class="fortify-control fortify-control-a" value="'.date('Y').'" />
-			<input type="text" name="fortify-q" class="fortify-control fortify-control-q"
-			    value="'.esc_html(FORTIFY_PLUGIN_VERSION).'" autocomplete="off" />
-		</p>'.$rn; // question (hidden with js)
+		echo '		<p class="fortify-group fortify-group-q" style="display: none;">
+			<label>Current year <span class="required">*</span></label>
+			<input type="text" name="fortify-q" class="fortify-control fortify-control-q" value="" />
+			<input type="text" name="fortify-a" class="fortify-control fortify-control-a" value="'.esc_html(date('Y')).'"/>
+		</p>'.$rn; // question which is populated by javascript
 		echo '		<p class="fortify-group fortify-group-e" style="display: none;">
 			<label>Leave this field empty</label>
-			<input type="text" name="fortify-e-email-url-website" class="fortify-control fortify-control-e" value="" autocomplete="off" />
-		</p>'.$rn; // empty field (hidden with css); trap for spammers because many bots will try to put email or url here
+			<input type="text" name="fortify-e-email-url-website" class="fortify-control fortify-control-e" value="" />
+		</p>'.$rn; // empty field; trap for spammers because many bots will try to put email or url here
+		echo '		<script type="text/javascript">
+			let fortify_a = document.getElementsByClassName("fortify-control-a")[0].value;
+			document.querySelector(".fortify-control-q").value = fortify_a;
+		</script>';
 	}
 }
 add_action('comment_form', 'fortify_form_part'); // add fortify inputs to the comment form
@@ -61,7 +55,7 @@ function fortify_check_comment($commentdata) {
 				fortify_store_comment($commentdata);
 			}
 			fortify_counter_stats();
-			wp_die('Comment is a spam.'); // die - do not send comment and show error message
+			wp_die('Comment is spam.'); // die - do not send comment and show error message
 		}
 	}
 	

@@ -33,15 +33,10 @@ function fortify_counter_stats() {
 
 function fortify_check_for_spam() {
 	$spam_flag = false;
-		
+
 	$fortify_q = '';
 	if (isset($_POST['fortify-q'])) {
 		$fortify_q = sanitize_text_field($_POST['fortify-q']);
-	}
-	
-	$fortify_d = '';
-	if (isset($_POST['fortify-d'])) {
-		$fortify_d = sanitize_text_field($_POST['fortify-d']);
 	}
 	
 	$fortify_e = '';
@@ -50,9 +45,7 @@ function fortify_check_for_spam() {
 	}
 	
 	if ( $fortify_q != date('Y') ) { // year-answer is wrong - it is spam
-		if ( $fortify_d != date('Y') ) { // extra js-only check: there is no js added input - it is spam
-			$spam_flag = true;
-		}
+		$spam_flag = true;
 	}
 
 	if ( ! empty($fortify_e)) { // trap field is not empty - it is spam

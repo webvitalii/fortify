@@ -18,7 +18,7 @@ function fortify_admin_notice() {
 			?>
 			<div class="update-nag fortify-panel-info">
 				<p style="margin: 0;">
-					<?php echo $blocked_total; ?> spam comments were blocked by <a href="http://wordpress.org/plugins/fortify/">Fortify</a> plugin so far.
+					<?php echo $blocked_total; ?> spam comments have been blocked by <a href="http://wordpress.org/plugins/fortify/">Fortify</a> plugin so far.
 				</p>
 			</div>
 			<?php
