@@ -22,20 +22,19 @@ include('fortify-info.php');
 
 
 function fortify_form_part() {
-	$rn = "\r\n"; // .chr(13).chr(10)
 
 	if ( ! is_user_logged_in()) { // add fortify fields only for not logged in users
-		echo $rn.'<!-- Fortify plugin v.'.esc_html(FORTIFY_PLUGIN_VERSION).' wordpress.org/plugins/fortify/ -->'.$rn;
-		echo '		<p class="fortify-group fortify-group-q" style="display: none;">
+		echo '<!-- Fortify plugin v.'.esc_html(FORTIFY_PLUGIN_VERSION).' wordpress.org/plugins/fortify/ -->
+		<p class="fortify-group fortify-group-q" style="display: none;">
 			<label>Current year <span class="required">*</span></label>
 			<input type="text" name="fortify-q" class="fortify-control fortify-control-q" value="" />
 			<input type="text" name="fortify-a" class="fortify-control fortify-control-a" value="'.esc_html(date('Y')).'"/>
-		</p>'.$rn; // question which is populated by javascript
-		echo '		<p class="fortify-group fortify-group-e" style="display: none;">
+		</p> <!-- question which is populated by javascript -->
+		<p class="fortify-group fortify-group-e" style="display: none;">
 			<label>Leave this field empty</label>
 			<input type="text" name="fortify-e-email-url-website" class="fortify-control fortify-control-e" value="" />
-		</p>'.$rn; // empty field; trap for spammers because many bots will try to put email or url here
-		echo '		<script type="text/javascript">
+		</p> <!-- empty field; trap for spammers because many bots will try to put email or url here -->
+		<script type="text/javascript">
 			let fortify_a = document.getElementsByClassName("fortify-control-a")[0].value;
 			document.querySelector(".fortify-control-q").value = fortify_a;
 		</script>';
